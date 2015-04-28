@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-app lang="en">
+<head>
+    <meta charset="utf-8">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style type="text/css">
+    ul>li, a{cursor: pointer;}
+    </style>
+    <title>Mrs W Appointment Register</title>
+    <link href="/appointment/images/favicon.ico" rel="icon" type="image/x-icon" />
+</head>
+<body>
+<div class="navbar navbar-default" id="navbar">
+    <div class="container" id="navbar-container">
+    <div class="navbar-header">
+        <!-- <a href="http://angularcode.com" class="navbar-brand"> -->
+        <a href="http://missusdoubleu.com/thaiSilkMassage" target="_blank" class="navbar-brand"> 
+            <small>
+                <i class="glyphicon glyphicon-log-out"></i>
+                Mrs W Thai Silk Massage 
+            </small>
+        </a><!-- /.brand -->
+        
+    </div><!-- /.navbar-header -->
+    <div class="navbar-header pull-right" role="navigation">
+        <a href="http://missusdoubleu.com/thaiSilkMassage" class="btn btn-sm btn-success nav-button-margin"> <i class="glyphicon glyphicon-pin"></i>&nbsp;Mrs W Home</a> 
+        
+    </div>
+    </div>
+</div>
+
+
+
+<div>
+<div class="container">
+<br/>
+<img src="/appointment/images/logo.250x84.jpg" style="float:right;margin:5px 5px 25px 5px;"/>
+<h2>Mrs W Thai Silk Massage Appointment Register</a></h2>
+    <div ng-view="" id="ng-view"></div>
+   
+</div>
+</div>
+<script src="js/angular.min.js"></script>
+<script src="js/angular-route.min.js"></script>
+<script src="app/app.js"></script>  
+<script src="js/mhc.js"></script>       
+</body>
+</html>
