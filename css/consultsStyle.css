@@ -1,0 +1,32 @@
+@import url('//netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css');
+@import url('http://jdewit.github.io/bootstrap-timepicker/css/bootstrap-timepicker.min.css');
+
+#prevNextButtons {
+		margin-bottom: 20px;
+		margin-left: 20px;
+		margin-right: 20px;
+		margin-top: 20px;
+	}
+
+#displayDate {
+		width: 50px;
+		border: 0px solid;
+		margin-left: 20px;
+	}
+
+#effectiveDateDisplayed {
+		width: 100px
+	}
+
+#notifyDisplayDate {
+		color: green;
+		margin-left: 20px;
+		margin-bottom: 20px;
+}
+
+#buttonGroup {
+		margin-left: 10px;
+		margin-bottom: 10px;
+		width: 200px;
+		border: 1px solid; 
+	}
