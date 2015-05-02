@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <!-- Consults index page -->
-<html >
-<title>Mrs W</title>
+<html  lang="en" ng-app="consultsApplication" ng-controller="ConsultsController">
+<title>Consults - Angular</title>
 <head>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/consultsStyle.css" rel="stylesheet">
-	<script src="js/angular.min.js"></script>
-	<script src="js/angular-route.min.js"></script>
+   <link href="css/toaster.css" rel="stylesheet">
 </head>
 <body>
-
-	<div  class="container" ng-app="consultsApplication">
+<toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+	<div class="navbar navbar-default" id="navbar">
+	    <div class="container" id="navbar-container">
+	    <div class="navbar-header">
+	        <a href="/thaiSilk/appointment/#/logout" class="navbar-brand">
+	            <small>
+	                <i class="glyphicon glyphicon-log-out"></i>
+	                Logout 
+	            </small>
+	        </a>
+	        
+	    </div><!-- /.navbar-header -->
+	    </div>
+	</div>
+	<div  class="container">
 		<h1>Mrs W Thai Silk Massage</h1>
 		<h2>Appointment Book</h2>
 
@@ -21,7 +33,15 @@
 		</div>
 
 	</div>
+	<script src="js/angular.min.js"></script>
+	<script src="js/angular-route.min.js"></script>
+	<script src="js/angular-animate.min.js" ></script>
+	<script src="js/toaster.js"></script>
 	<script src="app/consultsApp.js"></script>  
-	<script src="js/consultsMhc.js"></script> 
+	<script src="js/consultsMhc.js"></script>
+	<script src="app/loginApp.js"></script>
+	<script src="app/data.js"></script>
+	<script src="app/directives.js"></script>
+	<script src="app/consultsControllers.js"></script>
 </body>
 </html>
