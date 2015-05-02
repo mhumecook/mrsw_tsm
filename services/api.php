@@ -5,15 +5,14 @@
 	
 		public $data = "";
 		
-		const DB_SERVER = "localhost";
-		const DB_USER = "markhc";
-		const DB_PASSWORD = "sqlpass";
-		const DB = "mrsw_tsm";
+		const DB_SERVER = "missusw.db.11449081.hostedresource.com";
+		const DB_USER = "missusw";
+		const DB_PASSWORD = "two@AT1me";
+		const DB = "missusw";
 
 		private $db = NULL;
 		private $mysqli = NULL;
 		public function __construct(){	
-		file_put_contents('/tmp/serviceLog.txt', 'Creating appointment services...'.PHP_EOL, FILE_APPEND);
 			parent::__construct();				// Init parent contructor
 			$this->dbConnect();					// Initiate Database connection
 		}
@@ -65,7 +64,6 @@
 				$this->response('',406);
 			}
 			$query="SELECT a.appointment_id, a.appointment_date, a.day_of_week, a.customer_name, a.appointment_time, a.appointment_duration, a.therapy_type, a.therapist, a.payment_amount FROM appointment a ";
-			file_put_contents('/tmp/sqlLog.txt', $query.PHP_EOL, FILE_APPEND);			
 			$r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
 
 			if($r->num_rows > 0){
@@ -77,13 +75,41 @@
 			}
 			$this->response('',204);	// If no records "No Content" status
 		}
+		
+		private function filteredAppointments() {		
+			
+			if($this->get_request_method() != "GET"){
+				$this->response('',406);
+			}
+			$filter_date = $this->_request['effective_date'];		
+			$filter_date_string = "'";
+			$filter_date_string = $filter_date_string.$filter_date;
+			$filter_date_string = $filter_date_string."'";	
+			if($filter_date_string != ''){	
+				$query="SELECT a.appointment_id, a.appointment_date, a.day_of_week, a.customer_name, a.appointment_time, 
+													a.appointment_duration, a.therapy_type, a.therapist, a.payment_amount 
+													FROM appointment a 
+													where DATE_FORMAT(a.appointment_date,'%Y-%m-%d')= $filter_date_string
+													ORDER BY a.appointment_time asc";
+				$r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
+				if($r->num_rows > 0) {
+					$result = array();
+				while($row = $r->fetch_assoc()){
+					$result[] = $row;
+				}
+				$this->response($this->json($result), 200); // send user details
+			}
+			}
+			$this->response('',204);	// If no records "No Content" status
+		}
+		
 		private function appointment(){	
 			if($this->get_request_method() != "GET"){
 				$this->response('',406);
 			}
 			$id = (int)$this->_request['id'];
 			if($id > 0){	
-				$query="SELECT distinct a.appointment_id, a.appointment_date, a.day_of_week, a.customer_name, a.appointment_time, a.appointment_duration, a.therapy_type, a.therapist_name, a.amount_paid FROM appointment a where a.appointment_id=$id";
+				$query="SELECT a.appointment_id, a.appointment_date, a.day_of_week, a.customer_name, a.appointment_time, a.appointment_duration, a.therapy_type, a.therapist, a.payment_amount FROM appointment a where a.appointment_id=$id";
 				$r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
 				if($r->num_rows > 0) {
 					$result = $r->fetch_assoc();	
@@ -91,32 +117,14 @@
 				}
 			}
 			$this->response('',204);	// If no records "No Content" status
-		}
-		
-		private function getFilteredAppointments() {		
-			
-			if($this->get_request_method() != "GET"){
-				$this->response('',406);
-			}
-			$filter_date = $this->_request['filter_date'];
-			if($filter_date != ''){	
-				$query="SELECT a.appointment_id, a.appointment_date, a.day_of_week, a.customer_name, a.appointment_time, a.appointment_duration, a.therapy_type, a.therapist, a.payment_amount FROM appointment a where DATE_FORMAT(a.appointment_date,'%Y-%m-%d')=$filter_date";
-				$r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
-				if($r->num_rows > 0) {
-					$result = $r->fetch_assoc();	
-					$this->response($this->json($result), 200); // send user details
-				}
-			}
-			$this->response('',204);	// If no records "No Content" status
-		}
-		
+		}		
 		private function insertAppointment(){
 			if($this->get_request_method() != "POST"){
 				$this->response('',406);
 			}
 
 			$appointment = json_decode(file_get_contents("php://input"),true);
-			$column_names = array('appointment_date', 'customer_name', 'appointment_time', 'appointment_duration', 'therapy_type', 'therapist_name', 'amount_paid');
+			$column_names = array('appointment_date', 'day_of_week', 'customer_name', 'appointment_time', 'appointment_duration', 'therapy_type', 'therapist', 'payment_amount');
 			$keys = array_keys($appointment);
 			$columns = '';
 			$values = '';
@@ -141,9 +149,9 @@
 			if($this->get_request_method() != "POST"){
 				$this->response('',406);
 			}
-			$appointment = json_decode(file_get_contents("php://input"),true);
+			$appointment = json_decode(file_get_contents("php://input"),true);	
 			$id = (int)$appointment['id'];
-			$column_names = array('appointment_date', 'customer_name', 'appointment_time', 'appointment_duration', 'therapy_type', 'therapist_name', 'amount_paid');
+			$column_names = array('appointment_date', 'day_of_week', 'customer_name', 'appointment_time', 'appointment_duration', 'therapy_type', 'therapist', 'payment_amount');
 			$keys = array_keys($appointment['appointment']);
 			$columns = '';
 			$values = '';
@@ -188,10 +196,7 @@
 		}
 	}
 	
-	// Initiiate Library
-	
-	
-	file_put_contents('/tmp/serviceLog.txt', 'Initiating appointment services...'.PHP_EOL, FILE_APPEND);
+	// Initiate Library
 	$api = new API;
 	$api->processApi();
 ?>

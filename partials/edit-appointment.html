@@ -24,21 +24,20 @@
             <h3>{{title}}</h3>
         </header>
         <div class="col-md-12">
-
+        
 <form role="form" name="myForm" class="form-horizontal">
 <div class="row">
 
-<div class= "form-group" ng-class="{error: myForm.name.$invalid}">
+<div class= "form-group" >
     <label class= "col-md-2"> Date </label>
     <div class="col-md-4">
-    <input name="Date" ng-model="appointment.appointment_date" type= "text" id="datieDate" class= "form-control" placeholder="Date" required/>
-    <span ng-show="myForm.appointment_date.$dirty && myForm.appointment_date.$invalid" class="help-inline">Date</span>
+    <input name="Date" ng-model="appointment.appointment_date" type= "date" id="datieDate" class= "form-control" placeholder="Date" required/>
+    <!-- <span ng-show="myForm.appointment_date.$dirty && myForm.appointment_date.$invalid" class="help-inline">Date</span> -->
     </div>
     
     <label class= "col-md-2"> Day </label>
     <div class="col-md-2">
     <input name="Day" ng-model="appointment.day_of_week" type= "text" id="datieDay" class= "form-control" placeholder="Day" readonly/>
-    <span ng-show="myForm.day_of_week.$dirty && myForm.day_of_week.$invalid" class="help-inline">Day</span>
     </div>
 </div>
 
@@ -46,15 +45,12 @@
     <label class= "col-md-2"> Name </label>
     <div class="col-md-4">
     <input name="Name" ng-model="appointment.customer_name" type= "text" class= "form-control" placeholder="Customer name" required/>
-    <span ng-show="myForm.customer_name.$dirty && myForm.customer_name.$invalid" class="help-inline">Name Required</span>
     </div>
 </div>
 <div class= "form-group">
     <label class= "col-md-2"> Appointment Time </label>
     <div class="col-md-4">
     <input name="Time" ng-model="appointment.appointment_time" type= "text" class= "form-control" placeholder="Enter time" required/>
-    <span ng-show="myForm.appointment_time.$dirty && myForm.appointment_time.$invalid && !myForm.appointment_time.$error.appointment_time" class="help-inline">Time Required</span>
-    <span ng-show="myForm.appointment_time.$error.appointment_time" class="help-inline">Time is not valid</span>
     </div>
 </div>   
 
@@ -72,24 +68,22 @@
         <option>Thai</option>
         <option>Foot</option>
     </select>
-    <!-- <input ng-model="appointment.therapy_type" type= "text" class= "form-control" placeholder= "Therapy Type"/> -->
     </div>
 </div>
 <div class= "form-group">
     <label class= "col-md-2">Therapist </label>
     <div class="col-md-4">
-    <select ng-model="appointment.therapist_name" type= "text" class= "form-control" placeholder= "Therapist">
+    <select ng-model="appointment.therapist" type= "text" class= "form-control" placeholder= "Therapist">
         <option>Naa</option>
         <option>Pam</option>
-        <option>Sandy</option>
+        <option>Sandee</option>
     </select>
-    <!-- <input ng-model="appointment.therapist_name" type= "text" class= "form-control" placeholder= "Therapist"/> -->
     </div>
 </div>
 <div class= "form-group">
     <label class= "col-md-2">Amount </label>
     <div class="col-md-4">
-    <input ng-model="appointment.amount_paid" type= "text" class= "form-control" placeholder= "Amount paid"/>
+    <input ng-model="appointment.payment_amount" type= "text" class= "form-control" placeholder= "Amount paid"/>
     </div>
 </div>
 <div class= "form-group">
