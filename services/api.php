@@ -126,7 +126,6 @@
 			$appointment = json_decode(file_get_contents("php://input"),true);
 			//Clean up the appointment time for the fussy old database			
 			$appointment_time = $appointment['appointment_time'];
-			$remove_separators   = array(".", ",");
 			$new_appointment_time = str_replace(".", ":", $appointment_time);	
 			$appointment['appointment_time'] = $new_appointment_time;		
 
@@ -156,6 +155,10 @@
 				$this->response('',406);
 			}
 			$appointment = json_decode(file_get_contents("php://input"),true);	
+			//Clean up the appointment time for the fussy old database			
+			$appointment_time = $appointment['appointment_time'];
+			$new_appointment_time = str_replace(".", ":", $appointment_time);	
+			$appointment['appointment_time'] = $new_appointment_time;		
 			$id = (int)$appointment['id'];
 			$column_names = array('appointment_date', 'day_of_week', 'customer_name', 'appointment_time', 'appointment_duration', 'therapy_type', 'therapist', 'payment_amount');
 			$keys = array_keys($appointment['appointment']);
