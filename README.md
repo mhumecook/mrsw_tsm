@@ -1,2 +1,2 @@
 # mrsw_tsm
-Repository for code associated with various software ventures related to mrsw businesses
+Repository for code associated with the Thai Silk Massage venture
