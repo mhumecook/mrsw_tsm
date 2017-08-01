@@ -29,7 +29,7 @@
 <div class="row">
 
 <div class= "form-group" ng-class="{error: myForm.name.$invalid}">
-    <label class= "col-md-2"> Date </label>
+    <label class= "col-md-2"> Date  </label>
     <div class="col-md-4">
     <input name="Date" ng-model="appointment.appointment_date" type= "date" id="datieDate" class= "form-control" placeholder="Date" required/>
     <span ng-show="myForm.appointment_date.$dirty && myForm.appointment_date.$invalid" class="help-inline">Date</span>
@@ -45,7 +45,7 @@
 <div class= "form-group" ng-class="{error: myForm.name.$invalid}">
     <label class= "col-md-2"> Name </label>
     <div class="col-md-4">
-    <input name="Name" ng-model="appointment.customer_name" type= "text" class= "form-control" placeholder="Customer name" required/>
+    <input name="Name" ng-model="appointment.customer_name" type= "text" focus class= "form-control" placeholder="Customer name" required/>
     <span ng-show="myForm.customer_name.$dirty && myForm.customer_name.$invalid" class="help-inline">Name Required</span>
     </div>
 </div>
@@ -71,6 +71,7 @@
         <option>Oil</option>
         <option>Thai</option>
         <option>Foot</option>
+        <option>Deep</option>
     </select>
     </div>
 </div>
@@ -79,8 +80,13 @@
     <div class="col-md-4">
     <select ng-model="appointment.therapist" type= "text" class= "form-control" placeholder= "Therapist">
         <option>Naa</option>
-        <option>Pam</option>
         <option>Sandee</option>
+        <option>Eve</option>
+        <option>Tang</option>
+        <option>Queen</option>
+        <option>Gung</option>
+        <option>Best</option>
+        <option>O</option>
     </select>
     </div>
 </div>
@@ -88,6 +94,15 @@
     <label class= "col-md-2">Amount </label>
     <div class="col-md-4">
     <input ng-model="appointment.payment_amount" type= "text" class= "form-control" placeholder= "Amount paid"/>
+    </div>
+</div>
+<div class= "form-group">
+    <label class= "col-md-2">Location </label>
+    <div class="col-md-4">
+    <select ng-model="appointment.location" type= "text" class= "form-control" placeholder= "Location">
+        <option>Newport</option>
+        <option>Seddon</option>
+    </select>
     </div>
 </div>
 <div class= "form-group">

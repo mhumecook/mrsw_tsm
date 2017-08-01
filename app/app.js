@@ -5,15 +5,15 @@ app.factory("services", ['$http', function($http) {
     var obj = {};
     obj.getAppointments = function(){
         return $http.get(serviceBase + 'appointments');
-    }
+    };
     obj.getFilteredAppointments = function(targetDateString){
     	var instring = serviceBase + 'getFilteredAppointments?filter_date = ' + targetDateString;
     	//alert(instring);
         return $http.get(serviceBase + 'getFilteredAppointments?filter_date = ' + targetDateString);
-    }
+    };
     obj.getAppointment = function(appointment_id){
         return $http.get(serviceBase + 'appointment?id=' + appointment_id);
-    }
+    };
 
     obj.insertAppointment = function (appointment) {
     return $http.post(serviceBase + 'insertAppointment', appointment).then(function (results) {
@@ -59,14 +59,15 @@ app.controller('editCtrl', function ($scope, $rootScope, $location, $routeParams
       original._id = appointment_id;
       $scope.appointment = angular.copy(original);
       $scope.appointment._id = appointment_id;
+      $scope.appointment.appointment_date = "12/31/2015";
 
       $scope.isClean = function() {
         return angular.equals(original, $scope.appointment);
-      }
+      };
 
       $scope.deleteAppointment = function(appointment) {
         $location.path('/');
-        if(confirm("Are you sure you want to delete appointment number: "+$scope.appointment._id)==true)
+        if(confirm("Are you sure you want to delete appointment number: "+$scope.appointment._id)===true)
         services.deleteAppointment(appointment.appointment_id);
       };
 
@@ -79,6 +80,22 @@ app.controller('editCtrl', function ($scope, $rootScope, $location, $routeParams
             services.updateAppointment(appointment_id, appointment);
         }
     };
+});
+
+app.directive('focusMe', function($timeout) {
+  return {
+    link: function(scope, element, attrs) {
+      scope.$watch(attrs.focusMe, function(value) {
+        if(value === true) { 
+          console.log('value=',value);
+          $timeout(function() {
+            element[0].focus();
+            scope[attrs.focusMe] = false;
+          });
+        }
+      });
+    }
+  };
 });
 
 app.config(['$routeProvider',

@@ -1,9 +1,9 @@
 <IfModule mod_rewrite.c>
-    RewriteEngine On
+    RewriteEngine On 
     RewriteBase /thaiSilk/appointment/services/
 
 	RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-s
+    	RewriteCond %{REQUEST_FILENAME} !-s
 	RewriteRule ^(.*)$ api.php?x=$1 [QSA,NC,L]
 
 	RewriteCond %{REQUEST_FILENAME} -d

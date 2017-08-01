@@ -63,7 +63,7 @@
 			if($this->get_request_method() != "GET"){
 				$this->response('',406);
 			}
-			$query="SELECT a.appointment_id, a.appointment_date, a.day_of_week, a.customer_name, a.appointment_time, a.appointment_duration, a.therapy_type, a.therapist, a.payment_amount FROM appointment a ";
+			$query="SELECT a.appointment_id, a.appointment_date, a.day_of_week, a.customer_name, a.appointment_time, a.appointment_duration, a.therapy_type, a.therapist, a.payment_amount, a.location FROM appointment a ";
 			$r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
 
 			if($r->num_rows > 0){
@@ -76,7 +76,7 @@
 			$this->response('',204);	// If no records "No Content" status
 		}
 		
-		private function filteredAppointments() {		
+		private function filteredAppointments() {
 		
 			if($this->get_request_method() != "GET"){
 				$this->response('',406);
@@ -87,13 +87,14 @@
 			$filter_date_string = $filter_date_string."'";
 			if($filter_date_string != ''){	
 				$query="SELECT a.appointment_id, a.appointment_date, a.day_of_week, a.customer_name, a.appointment_time, 
-													a.appointment_duration, a.therapy_type, a.therapist, a.payment_amount 
+													a.appointment_duration, a.therapy_type, a.therapist, a.payment_amount, a.location 
 													FROM appointment a 
 													where DATE_FORMAT(a.appointment_date,'%Y-%m-%d')= $filter_date_string
 													ORDER BY a.appointment_time asc";
 				$r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
 				if($r->num_rows > 0) {
 					$result = array();
+                
 				while($row = $r->fetch_assoc()){
 					$result[] = $row;
 				}
@@ -109,7 +110,7 @@
 			}
 			$id = (int)$this->_request['id'];
 			if($id > 0){	
-				$query="SELECT a.appointment_id, a.appointment_date, a.day_of_week, a.customer_name, a.appointment_time, a.appointment_duration, a.therapy_type, a.therapist, a.payment_amount FROM appointment a where a.appointment_id=$id";
+				$query="SELECT a.appointment_id, a.appointment_date, a.day_of_week, a.customer_name, a.appointment_time, a.appointment_duration, a.therapy_type, a.therapist, a.payment_amount, a.location FROM appointment a where a.appointment_id=$id";
 				$r = $this->mysqli->query($query) or die($this->mysqli->error.__LINE__);
 				if($r->num_rows > 0) {
 					$result = $r->fetch_assoc();	
@@ -127,9 +128,9 @@
 			//Clean up the appointment time for the fussy old database			
 			$appointment_time = $appointment['appointment_time'];
 			$new_appointment_time = str_replace(".", ":", $appointment_time);	
-			$appointment['appointment_time'] = $new_appointment_time;		
+			$appointment['appointment_time'] = $new_appointment_time;
 
-			$column_names = array('appointment_date', 'day_of_week', 'customer_name', 'appointment_time', 'appointment_duration', 'therapy_type', 'therapist', 'payment_amount');
+			$column_names = array('appointment_date', 'day_of_week', 'customer_name', 'appointment_time', 'appointment_duration', 'therapy_type', 'therapist', 'payment_amount', 'location');
 			$keys = array_keys($appointment);
 			$columns = '';
 			$values = '';
@@ -155,12 +156,12 @@
 				$this->response('',406);
 			}
 			$appointment = json_decode(file_get_contents("php://input"),true);	
-			//Clean up the appointment time for the fussy old database			
+            //Clean up the appointment time for the fussy old database    		
 			$appointment_time = $appointment['appointment_time'];
 			$new_appointment_time = str_replace(".", ":", $appointment_time);	
-			$appointment['appointment_time'] = $new_appointment_time;		
+			$appointment['appointment_time'] = $new_appointment_time;
 			$id = (int)$appointment['id'];
-			$column_names = array('appointment_date', 'day_of_week', 'customer_name', 'appointment_time', 'appointment_duration', 'therapy_type', 'therapist', 'payment_amount');
+			$column_names = array('appointment_date', 'day_of_week', 'customer_name', 'appointment_time', 'appointment_duration', 'therapy_type', 'therapist', 'payment_amount', 'location');
 			$keys = array_keys($appointment['appointment']);
 			$columns = '';
 			$values = '';

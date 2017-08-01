@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-keypress='doNewAppointment($event)' ng-keypress='doNewAppointment($event)'>
 	<div class="col-md-3">
 		<div id="buttonGroup">
 			<div class="btn-group" role="group" id="prevNextButtons">
@@ -17,7 +17,7 @@
 	<div class="col-md-12" ng-show="appointments.length > 0">
 		<nav class= "navbar navbar-default" role= "navigation" >
 			<div class= "navbar-header" >
-				<a class="btn btn-lg btn-success" href="#/edit-appointment/0"><i class="glyphicon glyphicon-plus"></i>&nbsp;Add new Appointment</a>
+				<a class="btn btn-lg btn-success" href="#/edit-appointment/0" focus><i class="glyphicon glyphicon-plus" focus="true"></i>&nbsp;Add new Appointment</a>
 			</div>
 		</nav>
 			<table class="table table-striped table-bordered">
@@ -29,6 +29,7 @@
 					<th>Therapy&nbsp;</th>
 					<th>Therapist&nbsp;</th>
 					<th>Paid&nbsp;</th>
+    				<th>Location&nbsp;</th>
 					<th>Action&nbsp;</th>
 				</thead>
 				<tbody>
@@ -40,6 +41,7 @@
 						<td>{{data.therapy_type}}</td>
 						<td>{{data.therapist}}</td>
 						<td>{{data.payment_amount}}</td>
+    					<td>{{data.location}}</td>
 						<td><a href="#/edit-appointment/{{data.appointment_id}}" class="btn">&nbsp;<i class="glyphicon glyphicon-edit"></i>&nbsp; Edit Appointment</a></td>
 					</tr>
 			</tbody>

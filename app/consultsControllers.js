@@ -26,13 +26,14 @@ app.controller('AuthenticationController', function ($scope, $rootScope, $routeP
     $scope.logout = function () {
         Data.get('logout').then(function (results) {
             Data.toast(results);
+            $rootScope.loggedIn = false;
             $location.path('login');
         });
     }
 });
 
-app.controller('TableController', function($scope, $rootScope, services) {
-		var currentDate = new Date(); 
+app.controller('TableController', function($scope, $rootScope, $location, services) {
+    	var currentDate = new Date(); 
 		
 		if ($rootScope.effectiveDate == null) {			
 			$scope.effectiveDate = currentDate;		
@@ -63,6 +64,14 @@ app.controller('TableController', function($scope, $rootScope, services) {
 					$scope.appointments = data.data;
 				});
 		};
+        
+         
+        $scope.doNewAppointment = function($event) {
+            if ($rootScope.authenticated)
+                $location.path('/edit-appointment/0');
+        };
+
+        
 	services.getConsultationsForDate($scope.effectiveDate).then(function(data) {
 		$scope.appointments = data.data;
 	});
@@ -81,20 +90,28 @@ app.controller('EditAppointmentController', function($scope, $rootScope, $locati
 		
 	$rootScope.title = (appointmentID > 0) ? 'Edit Appointment' : 'Add Appointment';
 	$scope.buttonText = (appointmentID > 0) ? 'Update Appointment' : 'Add New Appointment';
-
+    
+    //If this is a new appointment, set the date to the date on which we opened the editor
+    if (appointmentID === 0) 
+        {
+            original = {};
+            original.appointment_date = $scope.effectiveDate.toString("yyyy-MM-dd");
+        }
 	original._id = appointmentID;
 	$scope.appointment = angular.copy(original);
 	$scope.appointment._id = appointmentID;
 
 	$scope.isClean = function() {
 		return angular.equals(original, $scope.appointment);
-		}
+		};
 
-      $scope.deleteAppointment = function(appointment) {
+    $scope.deleteAppointment = function(appointment) {
         $location.path('/');
-        if(confirm("Are you sure you want to delete appointment number: "+$scope.appointment._id)==true)
-        services.deleteAppointment(appointment.appointment_id);
-      };
+        if(confirm("Are you sure you want to delete appointment number: "+$scope.appointment._id)===true)
+            {
+            services.deleteAppointment(appointment.appointment_id);
+            }
+        };
         
 	$scope.saveAppointment = function(appointment) {
 		$location.path('/');
@@ -119,4 +136,8 @@ app.controller('ConsultsController', function($scope, $location) {
 		$scope.logout = function() {
 			$location.path('logout');
 		};
+        
+        $scope.doNewAppointment = function() {
+            $location.path('/edit-appointment/0');
+        };
 });

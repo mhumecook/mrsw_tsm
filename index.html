@@ -1,47 +1,41 @@
 <!DOCTYPE html>
-<!-- Consults index page -->
-<html  lang="en" ng-app="consultsApplication" ng-controller="ConsultsController">
+<html lang="en" ng-app="consultsApplication" ng-controller="ConsultsController" >
+
 <title>Mrs W</title>
-<head>
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/consultsStyle.css" rel="stylesheet">
-   <link href="css/toaster.css" rel="stylesheet">
-</head>
-<body>
-<toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
-	<div class="navbar navbar-default" id="navbar">
-	    <div class="container" id="navbar-container">
-	    <div class="navbar-header">
-	        <a href="/thaiSilk/appointment/#/logout" class="navbar-brand">
-	            <small>
-	                <i class="glyphicon glyphicon-log-out"></i>
-	                Logout 
-	            </small>
-	        </a>
-	        
-	    </div><!-- /.navbar-header -->
-	    </div>
-	</div>
-	<div  class="container">
-		<h1>Mrs W Thai Silk Massage</h1>
-		<h2>Appointment Book</h2>
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/consultsStyle.css" rel="stylesheet" />
+<link href="css/toaster.css" rel="stylesheet" /><toaster-container toaster-options="{'time-out': 3000}"></toaster-container>
+<p>&nbsp;</p>
 
-		<div class="row">
-			<div class="col-md-9">
-				<div ng-view="consultsView" ></div>
-			</div>
-		</div>
+<div class="navbar navbar-default" id="navbar">
+<div class="container" id="navbar-container">
+<div class="navbar-header"><a class="navbar-brand" href="/thaiSilk/appointment/#/logout"><small>Logout </small> </a></div>
+<!-- /.navbar-header --></div>
+</div>
 
-	</div>
-	<script src="js/angular.min.js"></script>
-	<script src="js/angular-route.min.js"></script>
-	<script src="js/angular-animate.min.js" ></script>
-	<script src="js/toaster.js"></script>
-	<script src="app/consultsApp.js"></script>  
-	<script src="js/consultsMhc.js"></script>
-	<script src="app/loginApp.js"></script>
-	<script src="app/data.js"></script>
-	<script src="app/directives.js"></script>
-	<script src="app/consultsControllers.js"></script>
-</body>
-</html>
+<p>&nbsp;</p>
+
+<div class="container">
+<h1>Mrs W Thai Silk Massage</h1>
+
+<h2>Appointment Book</h2>
+
+<div class="row">
+<div class="col-md-9">
+<div ng-view="consultsView"  ng-app="" ng-controller="TableController">&nbsp;</div>
+</div>
+</div>
+</div>
+
+<p>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/angular-animate.min.js" ></script>
+    <script src="js/toaster.js"></script>
+    <script src="app/consultsApp.js"></script>
+    <script src="js/consultsMhc.js"></script>
+    <script src="app/data.js"></script>
+    <script src="app/directives.js"></script>
+    <script src="app/consultsControllers.js"></script>
+    <script src="http://www.datejs.com/build/date.js"></script>  
+</p>
