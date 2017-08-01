@@ -5,7 +5,7 @@
 	
 		public $data = "";
 		
-		const DB_SERVER = "missusw.db.11449081.hostedresource.com";
+		const DB_SERVER = "172.17.0.2";
 		const DB_USER = "missusw";
 		const DB_PASSWORD = "two@AT1me";
 		const DB = "missusw";
