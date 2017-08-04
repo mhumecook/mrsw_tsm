@@ -1,0 +1,8 @@
+FROM mobingi/ubuntu-apache2-php5
+RUN mkdir /var/www/html/thaiSilk
+COPY appointment.zip /var/www/html/thaiSilk
+RUN apt-get update
+RUN apt-get install -y zip
+WORKDIR /var/www/html/thaiSilk
+RUN unzip /var/www/html/thaiSilk/appointment.zip
+RUN rm /var/www/html/thaiSilk/appointment.zip
