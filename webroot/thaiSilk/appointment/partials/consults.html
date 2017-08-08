@@ -34,7 +34,7 @@
         <th>Action&nbsp;</th>
         </thead>
         <tbody>
-            <tr ng-repeat="data in appointments">
+            <tr ng-repeat="data in appointments track by $index">
                 <td>{{$index + 1}}</td>
                 <td>{{data.appointment_date}}</td>
                 <td>{{data.customer_name}}</td>

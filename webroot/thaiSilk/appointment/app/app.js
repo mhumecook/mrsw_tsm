@@ -8,7 +8,6 @@ app.factory("services", ['$http', function($http) {
     };
     obj.getFilteredAppointments = function(targetDateString){
     	var instring = serviceBase + 'getFilteredAppointments?filter_date = ' + targetDateString;
-    	//alert(instring);
         return $http.get(serviceBase + 'getFilteredAppointments?filter_date = ' + targetDateString);
     };
     obj.getAppointment = function(appointment_id){
@@ -46,7 +45,6 @@ app.controller('listCtrl', function ($scope, services) {
 app.controller('dateListCtrl', function ($scope, services, $routeParams) {
 	 var targetDateString = dateASDBStringFromSensibleFormat("01-04-2015");
     services.getFilteredAppointments(targetDateString).then(function(data){
-    	alert(data.data);
         $scope.appointments = data.data;
     });
 });

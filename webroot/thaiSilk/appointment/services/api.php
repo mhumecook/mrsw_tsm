@@ -1,11 +1,11 @@
 <?php
  	require_once("Rest.inc.php");
-	
+
 	class API extends REST {
 	
 		public $data = "";
 		
-		const DB_SERVER = "Please see the dbConnect method for this variable constant";
+		const DB_SERVER = "127.0.0.1";
 		const DB_USER = "missusw";
 		const DB_PASSWORD = "two@AT1me";
 		const DB = "missusw";
@@ -21,8 +21,7 @@
 		 *  Connect to Database
 		*/
 		private function dbConnect(){
-		  $DB_SERVER = getenv('DB_PORT_3306_TCP_ADDR');
-			$this->mysqli = new mysqli($DB_SERVER, self::DB_USER, self::DB_PASSWORD, self::DB);
+			$this->mysqli = new mysqli(self::DB_SERVER, self::DB_USER, self::DB_PASSWORD, self::DB);
 		}
 		
 		/*
