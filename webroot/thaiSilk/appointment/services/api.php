@@ -5,7 +5,7 @@
 	
 		public $data = "";
 		
-		const DB_SERVER = "127.0.0.1";
+		const DB_SERVER = "Not a constant - changes with the target container";
 		const DB_USER = "missusw";
 		const DB_PASSWORD = "two@AT1me";
 		const DB = "missusw";
@@ -21,7 +21,8 @@
 		 *  Connect to Database
 		*/
 		private function dbConnect(){
-			$this->mysqli = new mysqli(self::DB_SERVER, self::DB_USER, self::DB_PASSWORD, self::DB);
+		  $DB_SERVER = getenv('DB_PORT_3306_TCP_ADDR');
+			$this->mysqli = new mysqli($DB_SERVER, self::DB_USER, self::DB_PASSWORD, self::DB);
 		}
 		
 		/*
