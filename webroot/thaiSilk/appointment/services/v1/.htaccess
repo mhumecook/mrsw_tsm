@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteBase /thaiSilk/appointment/services/v1/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ %{ENV:BASE}index.php [QSA,L]
