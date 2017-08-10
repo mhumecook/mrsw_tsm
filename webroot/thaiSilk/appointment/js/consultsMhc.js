@@ -1,6 +1,5 @@
 //Initialise the date for the page
 var today = new Date();
-//document.getElementById("displayEffectiveDate").value = today;
 
 function displaySensibleDate(dateObject) {
 	var displayDay = dateObject.getDate();
